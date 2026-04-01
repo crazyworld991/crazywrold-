@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crazy Wrold | Premium Fashion</title>
+    <meta name="description" content="Discover premium, stylish, and minimal fashion apparel for men and women at Crazy Wrold.">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts for Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons for elegant UI icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <button class="mobile-menu-btn" aria-label="Menu" id="mobile-menu-btn">
+                    <i class="ph ph-list"></i>
+                </button>
+                <nav class="desktop-nav">
+                    <a href="#" class="nav-link" data-page="home">Home</a>
+                    <a href="#" class="nav-link" data-page="women">Women</a>
+                    <a href="#" class="nav-link" data-page="men">Men</a>
+                </nav>
+            </div>
+            
+            <div class="nav-center">
+                <a href="#" class="logo" data-page="home">Crazy Wrold</a>
+            </div>
+            
+            <div class="nav-right">
+                <button class="icon-btn search-btn" aria-label="Search">
+                    <i class="ph ph-magnifying-glass"></i>
+                </button>
+                <button class="icon-btn account-btn" aria-label="Account" id="account-btn">
+                    <i class="ph ph-user"></i>
+                </button>
+                <button class="icon-btn cart-btn" aria-label="Cart" id="cart-toggle">
+                    <i class="ph ph-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu" id="mobile-menu">
+            <div class="mobile-menu-header">
+                <button class="icon-btn close-menu-btn" id="close-menu-btn">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            <nav class="mobile-nav-links">
+                <a href="#" class="mobile-link" data-page="home">Home</a>
+                <a href="#" class="mobile-link" data-page="women">Women collection</a>
+                <a href="#" class="mobile-link" data-page="men">Men collection</a>
+                <a href="#" class="mobile-link" data-page="about">About Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area (Dynamic) -->
+    <main id="app-content">
+        <!-- Content will be injected here by app.js -->
+    </main>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar-overlay" id="cart-overlay"></div>
+    <aside class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="icon-btn close-cart-btn" id="close-cart-btn">
+                <i class="ph ph-x"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items-container">
+            <!-- Cart items injected here -->
+            <div class="empty-cart-msg">Your cart is currently empty.</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Subtotal</span>
+                <span id="cart-subtotal">$0.00</span>
+            </div>
+            <p class="cart-taxes-msg">Taxes and shipping calculated at checkout</p>
+            <button class="btn btn-primary checkout-btn" id="checkout-btn" disabled>Proceed to Checkout</button>
+        </div>
+    </aside>
+
+    <!-- Login/Signup Modal -->
+    <div class="auth-modal-overlay" id="auth-overlay">
+        <div class="auth-modal">
+            <button class="icon-btn close-auth-btn" id="close-auth-btn"><i class="ph ph-x"></i></button>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Login</button>
+                <button class="auth-tab" data-tab="signup">Sign Up</button>
+            </div>
+            <div class="auth-content active" id="login-form">
+                <h2>Welcome Back</h2>
+                <form onsubmit="event.preventDefault()">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                    <button type="submit" class="btn btn-primary auth-submit">Sign In</button>
+                </form>
+            </div>
+            <div class="auth-content" id="signup-form">
+                <h2>Create Account</h2>
+                <form onsubmit="event.preventDefault()">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary auth-submit">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay">
+        <div class="search-container">
+            <button class="icon-btn close-search-btn" id="close-search-btn"><i class="ph ph-x"></i></button>
+            <div class="search-input-wrapper">
+                <i class="ph ph-magnifying-glass"></i>
+                <input type="text" id="search-input" placeholder="Search for products, categories..." autofocus>
+            </div>
+            <div class="search-results" id="search-results">
+                <!-- Search results will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <h3 class="footer-logo">Crazy Wrold</h3>
+                <p>Elevating everyday essentials with premium materials and timeless design.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="ph ph-twitter-logo"></i></a>
+                    <a href="#" aria-label="Pinterest"><i class="ph ph-pinterest-logo"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <a href="#" data-page="women">Women</a>
+                <a href="#" data-page="men">Men</a>
+                <a href="#">New Arrivals</a>
+                <a href="#">Bestsellers</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="#">Contact Us</a>
+                <a href="#">FAQs</a>
+                <a href="#">Shipping & Returns</a>
+                <a href="#">Size Guide</a>
+            </div>
+            <div class="footer-col newsletter-col">
+                <h4>Newsletter</h4>
+                <p>Subscribe to receive updates, access to exclusive deals, and more.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault()">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Crazy Wrold. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Templates for dynamic rendering -->
+    <template id="tpl-home">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-image-container">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop" alt="Fashion Collection" class="hero-img">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content">
+                <span class="hero-subtitle fade-up">Spring / Summer 2026</span>
+                <h1 class="hero-title fade-up delay-1">The Art of Minimalism</h1>
+                <p class="hero-desc fade-up delay-2">Discover our new collection of refined essentials.</p>
+                <div class="hero-actions fade-up delay-3">
+                    <button class="btn btn-primary shop-now-btn" data-page="women">Shop Women</button>
+                    <button class="btn btn-secondary shop-now-btn" data-page="men">Shop Men</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Highlights Section -->
+        <section class="categories-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Category Highlights</h2>
+                </div>
+                <div class="categories-grid">
+                    <div class="category-card" data-category="dresses" data-page="women">
+                        <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=1983&auto=format&fit=crop" alt="Dresses">
+                        <div class="category-content">
+                            <h3>Dresses</h3>
+                            <span>Explore</span>
+                        </div>
+                    </div>
+                    <div class="category-card" data-category="outerwear" data-page="men">
+                        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=1935&auto=format&fit=crop" alt="Outerwear">
+                        <div class="category-content">
+                            <h3>Outerwear</h3>
+                            <span>Explore</span>
+                        </div>
+                    </div>
+                    <div class="category-card" data-category="accessories" data-page="women">
+                        <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=2070&auto=format&fit=crop" alt="Accessories">
+                        <div class="category-content">
+                            <h3>Accessories</h3>
+                            <span>Explore</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Arrivals Section -->
+        <section class="featured-section section-padding bg-gray">
+            <div class="container">
+                <div class="section-header">
+                    <h2>New Arrivals</h2>
+                    <a href="#" class="view-all-link" data-page="women">Shop All</a>
+                </div>
+                <div class="product-grid" id="new-arrivals-products">
+                    <!-- New Arrival Products injected via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Promotional Banner -->
+        <section class="promo-banner">
+            <div class="promo-container">
+                <div class="promo-content">
+                    <span class="promo-label">Season Offer</span>
+                    <h2>Limited Edition Essentials</h2>
+                    <p>Experience the perfect blend of form and function. Get 20% off on your first purchase.</p>
+                    <button class="btn btn-primary" data-page="women">Shop the Collection</button>
+                </div>
+                <div class="promo-image">
+                    <img src="https://images.unsplash.com/photo-1533682805518-48d1f5b8cb3a?q=80&w=2070&auto=format&fit=crop" alt="Promo Image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending Collections Section -->
+        <section class="featured-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Trending Now</h2>
+                    <a href="#" class="view-all-link" data-page="women">View All</a>
+                </div>
+                <div class="product-grid" id="trending-products">
+                    <!-- Trending Products injected via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Editorial Section -->
+        <section class="editorial-section">
+            <div class="editorial-grid">
+                <div class="editorial-image">
+                    <img src="https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?q=80&w=2070&auto=format&fit=crop" alt="Editorial">
+                </div>
+                <div class="editorial-content">
+                    <h2>Sustainable Elegance</h2>
+                    <p>We believe in fashion that not only looks exceptional but also respects the world we live in. Our latest collection features ethically sourced materials and timeless designs meant to last a lifetime.</p>
+                    <button class="btn btn-outline" data-page="about">Read Our Story</button>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-listing">
+        <div class="page-header">
+            <div class="container">
+                <h1 class="page-title" id="listing-title">Collection</h1>
+                <p class="page-desc">Explore our carefully curated selection of premium pieces.</p>
+            </div>
+        </div>
+        <div class="listing-layout container section-padding">
+            <aside class="filters-sidebar">
+                <div class="filter-group">
+                    <h3>Category</h3>
+                    <ul class="filter-list" id="category-filters">
+                        <!-- Filters injected via JS -->
+                    </ul>
+                </div>
+                <div class="filter-group">
+                    <h3>Price</h3>
+                    <ul class="filter-list">
+                        <li><label><input type="checkbox" name="price" value="under-50"> Under $50</label></li>
+                        <li><label><input type="checkbox" name="price" value="50-100"> $50 - $100</label></li>
+                        <li><label><input type="checkbox" name="price" value="over-100"> Over $100</label></li>
+                    </ul>
+                </div>
+            </aside>
+            <div class="listing-content">
+                <div class="listing-toolbar">
+                    <span class="product-count" id="product-count">0 Products</span>
+                    <div class="sort-dropdown">
+                        <select id="sort-select">
+                            <option value="featured">Featured</option>
+                            <option value="newest">Newest Arrivals</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="product-grid" id="listing-grid">
+                    <!-- Products injected via JS -->
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-product">
+        <div class="container section-padding">
+            <div class="breadcrumbs">
+                <a href="#" data-page="home">Home</a> &rsaquo; 
+                <a href="#" id="breadcrumb-gender">Category</a> &rsaquo; 
+                <span id="breadcrumb-name">Product Name</span>
+            </div>
+            
+            <div class="product-detail-layout">
+                <div class="product-gallery">
+                    <div class="main-image-container">
+                        <img src="" alt="Product" id="detail-main-img">
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h1 class="product-title" id="detail-title">Product Title</h1>
+                    <div class="product-price" id="detail-price">$0.00</div>
+                    <div class="product-description" id="detail-desc">
+                        Product Description
+                    </div>
+                    
+                    <div class="product-options">
+                        <div class="option-group">
+                            <div class="option-header">
+                                <h3>Select Size</h3>
+                                <a href="#" class="size-guide-link">Size Guide</a>
+                            </div>
+                            <div class="size-selector" id="detail-sizes">
+                                <!-- Sizes injected via JS -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary add-to-cart-large" id="detail-add-to-cart">
+                        Add to Cart &mdash; <span id="detail-btn-price"></span>
+                    </button>
+                    
+                    <div class="product-features">
+                        <div class="feature"><i class="ph ph-truck"></i> Free standard shipping and returns</div>
+                        <div class="feature"><i class="ph ph-leaf"></i> Made with sustainable materials</div>
+                    </div>
+                    
+                    <div class="product-accordion">
+                        <details class="accordion-item" open>
+                            <summary>Details</summary>
+                            <div class="accordion-content">
+                                <ul>
+                                    <li>Premium quality construction</li>
+                                    <li>Designed in Paris</li>
+                                    <li>Dry clean only</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="accordion-item">
+                            <summary>Shipping & Returns</summary>
+                            <div class="accordion-content">
+                                <p>Complimentary express shipping on all orders over $200. Returns accepted within 14 days of delivery.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-checkout">
+        <div class="container section-padding">
+            <div class="page-header">
+                <h1 class="page-title">Checkout</h1>
+            </div>
+            <div class="checkout-layout">
+                <div class="checkout-form-section">
+                    <form class="checkout-form" id="checkout-form">
+                        <div class="checkout-block">
+                            <h2>Contact Information</h2>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="checkout-block">
+                            <h2>Shipping Address</h2>
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" id="fname" required>
+                                </div>
+                                <div class="form-group half">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" id="lname" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" id="address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="country">Country</label>
+                                    <select id="country" required>
+                                        <option value="us">United States</option>
+                                        <option value="uk">United Kingdom</option>
+                                        <option value="ca">Canada</option>
+                                        <option value="au">Australia</option>
+                                    </select>
+                                </div>
+                                <div class="form-group half">
+                                    <label for="zip">ZIP / Postal Code</label>
+                                    <input type="text" id="zip" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="checkout-block">
+                            <h2>Payment</h2>
+                            <div class="payment-methods-grid">
+                                <label class="payment-method-card">
+                                    <input type="radio" name="payment" value="bkash" required>
+                                    <span class="method-inner">
+                                        <i class="ph ph-mobile"></i>
+                                        <span>Bkash</span>
+                                    </span>
+                                </label>
+                                <label class="payment-method-card">
+                                    <input type="radio" name="payment" value="nagad" required>
+                                    <span class="method-inner">
+                                        <i class="ph ph-wallet"></i>
+                                        <span>Nagad</span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div id="payment-details" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="payment-phone" placeholder="01XXXXXXXXX" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="otp">Enter PIN/OTP</label>
+                                    <input type="password" id="payment-otp" placeholder="****" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary submit-btn-large">Complete Order</button>
+                    </form>
+                </div>
+                <div class="checkout-summary-section">
+                    <div class="summary-box">
+                        <h2>Order Summary</h2>
+                        <div id="checkout-items" class="checkout-items">
+                            <!-- Items injected via JS -->
+                        </div>
+                        <div class="summary-totals">
+                            <div class="summary-line">
+                                <span>Subtotal</span>
+                                <span id="checkout-subtotal">$0.00</span>
+                            </div>
+                            <div class="summary-line">
+                                <span>Shipping</span>
+                                <span>Free</span>
+                            </div>
+                            <div class="summary-line total">
+                                <span>Total</span>
+                                <span id="checkout-total">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
